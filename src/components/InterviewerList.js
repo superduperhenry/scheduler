@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import "components/InterviewerList.scss";
 import InterviewerListItem from "./InterviewerListItem";
@@ -12,7 +12,6 @@ const interviewers = [
 ];
 
 const InterviewerList = (props) => {
-  const [selected, setSelected] = useState(props.interviewer);
   return (
     <section className="interviewers">
       <h4 className="interviewers__header text--light">Interviewer</h4>
@@ -21,11 +20,11 @@ const InterviewerList = (props) => {
           const { id, name, avatar } = interviewer;
           return (
             <InterviewerListItem
-              key={id}
-              name={name}
-              avatar={avatar}
-              selected={interviewer.id === props.interviewer}
-              setInterviewer={() => props.setInterviewer(interviewer.id)}
+              key={interviewer.id}
+              name={interviewer.name}
+              avatar={interviewer.avatar}
+              selected={interviewer.id === value}
+              setInterviewer={() => onChange(interviewer.id)}
             />
           );
         })}
