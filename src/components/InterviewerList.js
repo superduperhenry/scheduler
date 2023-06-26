@@ -22,11 +22,10 @@ const InterviewerList = (props) => {
           return (
             <InterviewerListItem
               key={id}
-              id={id}
               name={name}
               avatar={avatar}
-              selected={selected === id}
-              setInterviewer={() => setSelected(id)}
+              selected={interviewer.id === props.interviewer}
+              setInterviewer={() => props.setInterviewer(interviewer.id)}
             />
           );
         })}
