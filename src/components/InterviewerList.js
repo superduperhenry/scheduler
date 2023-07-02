@@ -17,14 +17,13 @@ const InterviewerList = (props) => {
       <h4 className="interviewers__header text--light">Interviewer</h4>
       <ul className="interviewers__list">
         {interviewers.map((interviewer) => {
-          const { id, name, avatar } = interviewer;
           return (
             <InterviewerListItem
               key={interviewer.id}
               name={interviewer.name}
               avatar={interviewer.avatar}
-              selected={interviewer.id === value}
-              setInterviewer={() => onChange(interviewer.id)}
+              // selected={interviewer.id === value}
+              // setInterviewer={() => onChange(interviewer.id)}
             />
           );
         })}
