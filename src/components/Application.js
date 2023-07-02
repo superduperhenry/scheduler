@@ -5,6 +5,7 @@ import "components/Application.scss";
 import DayList from "./DayList";
 import Appointment from "./Appointments";
 import { getAppointmentsForDay, getInterview } from "../helpers/selectors";
+import useVisualMode from "../hooks/useVisualMode";
 
 export default function Application(props) {
   const [state, setState] = useState({
