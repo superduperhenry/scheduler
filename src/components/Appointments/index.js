@@ -5,8 +5,13 @@ import Header from "./Header";
 import Show from "./Show";
 import Empty from "./Empty";
 
-const Appointment = () => {
-  return <article className="appointment"></article>;
+const Appointment = (props) => {
+  return (
+    <article className="appointment">
+      <Header time={props.time}></Header>
+      {props.time ? <Show /> : <Empty />}
+    </article>
+  );
 };
 
 export default Appointment;
