@@ -59,7 +59,11 @@ const Appointment = (props) => {
       )}
 
       {mode === CREATE && (
-        <Form interviewers={[]} onCancel={() => back()} onSave={save} />
+        <Form
+          interviewers={props.interviewers}
+          onCancel={() => back()}
+          onSave={save}
+        />
       )}
 
       {mode === SAVING && <Status message="SAVING..." />}
@@ -75,6 +79,7 @@ const Appointment = (props) => {
         <Form
           student={props.interview.student}
           interviewer={props.interview.interviewer.id}
+          interviewers={props.interviewers}
           onCancel={() => back()}
           onSave={save}
         />

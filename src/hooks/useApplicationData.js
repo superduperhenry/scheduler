@@ -81,8 +81,7 @@ const useApplicationData = () => {
   const cancelInterview = (id) => {
     return axios
       .delete(`http://localhost:8001/api/appointments/${id}`)
-      .then((res) => {
-        console.log(res);
+      .then(() => {
         updateNumOfOpenSpots(state.days, id, 1);
       });
   };
