@@ -48,7 +48,6 @@ export default function Application(props) {
         {/* Replace this with the schedule elements durint the "The Scheduler" activity. */}
         {dailyAppointments.map((appointment) => {
           const interview = getInterview(state, appointment.interview);
-          console.log(state, `state`);
           return (
             <Appointment
               key={appointment.id}

@@ -21,7 +21,6 @@ const ERROR_SAVE = "ERROR_SAVE";
 const ERROR_DELETE = "ERROR_DELETE";
 
 const Appointment = (props) => {
-  console.log(props, `appointment props`);
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
   );

@@ -10,6 +10,29 @@ const useApplicationData = () => {
   });
   const setDay = (day) => setState({ ...state, day });
 
+  const updateNumOfOpenSpots = (days, id, incrementBy) => {
+    //find the day that contains the appointment
+    const dayContainingAppt = days.find((day) => day.appointments.includes(id));
+
+    //create a new day object with the updated spots
+    const newDay = {
+      ...dayContainingAppt,
+      spots: dayContainingAppt.spots + incrementBy,
+    };
+
+    //create a new days array with the updated day object
+    const newDays = [...days];
+
+    //replace the old day object with the new one
+    newDays.splice(dayContainingAppt.id - 1, 1, newDay);
+
+    //update the state with the new days array
+    setState((prev) => ({
+      ...prev,
+      days: [...newDays],
+    }));
+  };
+
   useEffect(() => {
     Promise.all([
       axios.get("http://localhost:8001/api/days"),
@@ -29,6 +52,7 @@ const useApplicationData = () => {
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview },
+
       // shape of interview object
       // const interview = {
       //   student: name, //name of student
@@ -44,10 +68,13 @@ const useApplicationData = () => {
     return axios
       .put(`http://localhost:8001/api/appointments/${id}`, { interview })
       .then(() => {
-        setState({
-          ...state,
-          appointments: appointments,
+        setState((state) => {
+          return {
+            ...state,
+            appointments: appointments,
+          };
         });
+        updateNumOfOpenSpots(state.days, id, -1);
       });
   };
 
@@ -56,6 +83,7 @@ const useApplicationData = () => {
       .delete(`http://localhost:8001/api/appointments/${id}`)
       .then((res) => {
         console.log(res);
+        updateNumOfOpenSpots(state.days, id, 1);
       });
   };
 
