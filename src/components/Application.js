@@ -72,6 +72,8 @@ export default function Application(props) {
       });
   };
 
+  const editInterview = (id) => {};
+
   return (
     <main className="layout">
       <section className="sidebar">
@@ -107,6 +109,7 @@ export default function Application(props) {
               interview={interview}
               bookInterview={bookInterview}
               cancelInterview={cancelInterview}
+              editInterview={editInterview}
             />
           );
         })}
