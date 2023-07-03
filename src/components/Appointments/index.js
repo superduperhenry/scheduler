@@ -35,15 +35,14 @@ const Appointment = (props) => {
     props
       .bookInterview(props.id, interview)
       .then(() => transition(SHOW))
-      .catch(() => transition(ERROR_SAVE)); //passed from application level
+      .catch(() => transition(ERROR_SAVE, true)); //passed from application level
   };
 
   const deleteInterview = () => {
-    const interview = null;
     props
-      .cancelInterview(props.id, interview)
+      .cancelInterview(props.id)
       .then(() => transition(EMPTY))
-      .catch(() => transition(ERROR_DELETE));
+      .catch(() => transition(ERROR_DELETE, true));
   };
 
   return (
@@ -85,10 +84,7 @@ const Appointment = (props) => {
         <Error
           message="Could not save appointment"
           //calling back twice to avoid going to SAVE mode when cancelling out of FORM
-          onClose={() => {
-            back();
-            back();
-          }}
+          onClose={() => back()}
         />
       )}
       {mode === ERROR_DELETE && (
