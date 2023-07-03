@@ -8,6 +8,7 @@ import useVisualMode from "../../hooks/useVisualMode";
 import Form from "./Form";
 import Status from "./Status";
 import Confirm from "./Confirm";
+import Error from "./Error";
 
 const EMPTY = "EMPTY";
 const SHOW = "SHOW";
@@ -16,6 +17,8 @@ const SAVING = "SAVING";
 const DELETE = "DELETE";
 const CONFIRM = "CONFIRM";
 const EDIT = "EDIT";
+const ERROR_SAVE = "ERROR_SAVE";
+const ERROR_DELETE = "ERROR_DELETE";
 
 const Appointment = (props) => {
   console.log(props, `appointment props`);
@@ -29,14 +32,18 @@ const Appointment = (props) => {
       interviewer, // id of interviewer
     };
     transition(SAVING);
-    props.bookInterview(props.id, interview).then(() => transition(SHOW)); //passed from application level
-    console.log(interview);
+    props
+      .bookInterview(props.id, interview)
+      .then(() => transition(SHOW))
+      .catch(() => transition(ERROR_SAVE)); //passed from application level
   };
 
-  const deleteInterview = (id) => {
+  const deleteInterview = () => {
     const interview = null;
-    props.cancelInterview(props.id, interview);
-    transition(EMPTY);
+    props
+      .cancelInterview(props.id, interview)
+      .then(() => transition(EMPTY))
+      .catch(() => transition(ERROR_DELETE));
   };
 
   return (
@@ -73,6 +80,19 @@ const Appointment = (props) => {
           onCancel={() => back()}
           onSave={save}
         />
+      )}
+      {mode === ERROR_SAVE && (
+        <Error
+          message="Could not save appointment"
+          //calling back twice to avoid going to SAVE mode when cancelling out of FORM
+          onClose={() => {
+            back();
+            back();
+          }}
+        />
+      )}
+      {mode === ERROR_DELETE && (
+        <Error message="Could not delete appointment" onClose={back} />
       )}
     </article>
   );
