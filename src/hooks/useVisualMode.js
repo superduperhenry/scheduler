@@ -9,6 +9,7 @@ export default function useVisualMode(initial) {
       setHistory((prev) => [...prev.slice(0, -1)]);
     }
     setHistory((prev) => [...prev, newMode]);
+    console.log(mode, `USEVISUALMODE LOG`);
   }
 
   function back() {

@@ -5,15 +5,15 @@ import "components/Application.scss";
 import DayList from "./DayList";
 import Appointment from "./Appointments";
 import { getAppointmentsForDay, getInterview } from "../helpers/selectors";
-import useVisualMode from "../hooks/useVisualMode";
 
 export default function Application(props) {
   const [state, setState] = useState({
     day: "Monday",
     days: [],
     appointments: {},
-    dailyAppointments: [],
+    interviewers: [],
   });
+  console.log(state, ` state`);
 
   const setDay = (day) => setState({ ...state, day });
   // const setDays = (days) => setState((state) => ({ ...state, days: days }));
@@ -37,6 +37,40 @@ export default function Application(props) {
     { days: state.days, appointments: state.appointments },
     state.day
   );
+
+  const bookInterview = (id, interview) => {
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview },
+      // shape of interview object
+      // const interview = {
+      //   student: name, //name of student
+      //   interviewer, // id of interviewer
+      // };
+    };
+
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment,
+    };
+
+    return axios
+      .put(`http://localhost:8001/api/appointments/${id}`, { interview })
+      .then(() => {
+        setState({
+          ...state,
+          appointments: appointments,
+        });
+      });
+  };
+
+  const cancelInterview = (id) => {
+    return axios
+      .delete(`http://localhost:8001/api/appointments/${id}`)
+      .then((res) => {
+        console.log(res);
+      });
+  };
 
   return (
     <main className="layout">
@@ -65,12 +99,14 @@ export default function Application(props) {
         {/* Replace this with the schedule elements durint the "The Scheduler" activity. */}
         {dailyAppointments.map((appointment) => {
           const interview = getInterview(state, appointment.interview);
-
+          console.log(state, `state`);
           return (
             <Appointment
               key={appointment.id}
               {...appointment}
               interview={interview}
+              bookInterview={bookInterview}
+              cancelInterview={cancelInterview}
             />
           );
         })}
