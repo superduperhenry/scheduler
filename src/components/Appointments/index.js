@@ -38,6 +38,7 @@ const Appointment = (props) => {
   };
 
   const deleteInterview = () => {
+    transition(DELETE, true);
     props
       .cancelInterview(props.id)
       .then(() => transition(EMPTY))
@@ -85,11 +86,7 @@ const Appointment = (props) => {
         />
       )}
       {mode === ERROR_SAVE && (
-        <Error
-          message="Could not save appointment"
-          //calling back twice to avoid going to SAVE mode when cancelling out of FORM
-          onClose={() => back()}
-        />
+        <Error message="Could not save appointment" onClose={() => back()} />
       )}
       {mode === ERROR_DELETE && (
         <Error message="Could not delete appointment" onClose={back} />
