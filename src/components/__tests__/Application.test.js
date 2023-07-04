@@ -5,6 +5,11 @@ import {
   cleanup,
   fireEvent,
   waitForElement,
+  getByText,
+  prettyDOM,
+  getAllByTestId,
+  getByAltText,
+  getByPlaceholderText,
 } from "@testing-library/react";
 
 import Application from "components/Application";
@@ -19,5 +24,40 @@ describe("Application", () => {
       fireEvent.click(getByText("Tuesday"));
       expect(getByText("Leopold Silvers")).toBeInTheDocument();
     });
+  });
+  // can also be written as using async/await:
+  // it("changes the schedule when a new day is selected", async () => {
+  //   const { getByText } = render(<Application />);
+
+  //   await waitForElement(() => getByText("Monday"));
+
+  //   fireEvent.click(getByText("Tuesday"));
+
+  //   expect(getByText("Leopold Silvers")).toBeInTheDocument();
+  // });
+
+  it("loads data, books an interview and reduces the spots remaining for Monday by 1", async () => {
+    const { container } = render(<Application />);
+
+    await waitForElement(() => getByText(container, "Archie Cohen"));
+
+    const appointments = getAllByTestId(container, "appointment");
+    const appointment = getAllByTestId(container, "appointment")[0];
+
+    //To test that the saving works we need to click the add button
+    fireEvent.click(getByAltText(appointment, "Add"));
+
+    // change the student name input
+    fireEvent.change(getByPlaceholderText(appointment, /enter student name/i), {
+      target: { value: "Lydia Miller-Jones" },
+    });
+
+    //click the interviewer
+    fireEvent.click(getByAltText(appointment, "Sylvia Palmer"));
+
+    //click the save button
+    fireEvent.click(getByText(appointment, "Save"));
+
+    console.log(prettyDOM(appointment));
   });
 });
