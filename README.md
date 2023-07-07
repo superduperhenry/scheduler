@@ -1,5 +1,7 @@
 # Interview Scheduler
 
+Interview Scheduler is a React application that allows users to book, edit, and cancel interviews with mentors.
+
 ## Setup
 
 Install dependencies with `npm install`.
@@ -21,3 +23,7 @@ npm test
 ```sh
 npm run storybook
 ```
+
+## API Server
+
+Interview scheduler connects to an API server. Set up instructions for the API server can be found [here](https://github.com/lighthouse-labs/scheduler-api).
