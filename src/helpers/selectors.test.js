@@ -2,7 +2,7 @@ import {
   getAppointmentsForDay,
   getInterview,
   getInterviewersForDay,
-} from "helpers/selectors";
+} from "./selectors";
 
 const state = {
   days: [

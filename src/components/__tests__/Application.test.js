@@ -14,7 +14,7 @@ import {
   queryByAltText,
 } from "@testing-library/react";
 
-import Application from "components/Application";
+import Application from "../Application";
 
 afterEach(cleanup);
 
@@ -103,7 +103,7 @@ describe("Application", () => {
     expect(getByText(day, "2 spots remaining")).toBeInTheDocument();
   });
 
-  xit("loads data, edits an interview and keeps the spots remaining for Monday the same", async () => {
+  it("loads data, edits an interview and keeps the spots remaining for Monday the same", async () => {
     // 1. Render the Application.
     const { container, debug } = render(<Application />);
 

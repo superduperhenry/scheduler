@@ -2,7 +2,7 @@ import React from "react";
 
 import { render, cleanup, fireEvent } from "@testing-library/react";
 
-import Form from "components/Appointments/Form";
+import Form from "../Appointments/Form";
 afterEach(cleanup);
 
 describe("Form", () => {
