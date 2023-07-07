@@ -27,3 +27,11 @@ npm run storybook
 ## API Server
 
 Interview scheduler connects to an API server. Set up instructions for the API server can be found [here](https://github.com/lighthouse-labs/scheduler-api).
+
+## Screenshots
+
+!["Appointment Form"](https://github.com/superduperhenry/scheduler/blob/master/docs/appointment-form.png?raw=true)
+
+!["Input Booking Details"](https://github.com/superduperhenry/scheduler/blob/master/docs/booking-appointment.png?raw=true)
+
+!["Confirm booked"](https://github.com/superduperhenry/scheduler/blob/master/docs/confirm-booked.png?raw=true)
