@@ -39,13 +39,11 @@ export function getInterviewersForDay(state, day) {
   if (filteredDay.length === 0) {
     return [];
   }
-
   //if day exist, return interviewers for that day
   const interviewersForTheDay = filteredDay[0].interviewers.map(
     (interviewerID) => {
       return interviewers[interviewerID];
     }
   );
-
   return interviewersForTheDay;
 }
