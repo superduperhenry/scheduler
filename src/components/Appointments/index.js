@@ -37,6 +37,18 @@ const Appointment = (props) => {
       .catch(() => transition(ERROR_SAVE, true)); //passed from application level
   };
 
+  const editInterview = (name, interviewer) => {
+    const interview = {
+      student: name, //name of student
+      interviewer, // id of interviewer
+    };
+    transition(SAVING);
+    props
+      .editInterview(props.id, interview)
+      .then(() => transition(SHOW))
+      .catch(() => transition(ERROR_SAVE, true)); //passed from application level
+  };
+
   const deleteInterview = () => {
     transition(DELETE, true);
     props
@@ -82,7 +94,7 @@ const Appointment = (props) => {
           interviewer={props.interview.interviewer.id}
           interviewers={props.interviewers}
           onCancel={() => back()}
-          onSave={save}
+          onSave={editInterview}
         />
       )}
       {mode === ERROR_SAVE && (

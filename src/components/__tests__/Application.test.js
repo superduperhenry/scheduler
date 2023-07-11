@@ -164,9 +164,9 @@ describe("Application", () => {
     expect(getByText(appointment, "SAVING...")).toBeInTheDocument();
 
     //check that the saving status is displayed
-    expect(
+    await waitForElement(() =>
       getByText(appointment, "Could not save appointment")
-    ).toBeInTheDocument();
+    );
   });
 
   it("shows the delete error when failing to delete an existing appointment", async () => {
@@ -196,8 +196,8 @@ describe("Application", () => {
 
     expect(getByText(appointment, "DELETING...")).toBeInTheDocument();
 
-    expect(
-      getByText(appointment, "Could not delete appointment")
-    ).toBeInTheDocument();
+    await waitForElement(() => {
+      return getByText(appointment, "Could not delete appointment");
+    });
   });
 });
