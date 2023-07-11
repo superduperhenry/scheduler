@@ -33,7 +33,6 @@ export function getInterview(state, interview) {
 
 export function getInterviewersForDay(state, day) {
   const { days, interviewers } = state;
-
   //check if day is found in state
   const filteredDay = days.filter((d) => d.name === day);
   //check to see if such a day exist, if not return empty array
@@ -42,9 +41,9 @@ export function getInterviewersForDay(state, day) {
   }
 
   //if day exist, return interviewers for that day
-  const interviewersForTheDay = filteredDay[0].appointments.map(
-    (interviewer) => {
-      return interviewers[interviewer];
+  const interviewersForTheDay = filteredDay[0].interviewers.map(
+    (interviewerID) => {
+      return interviewers[interviewerID];
     }
   );
 

@@ -8,7 +8,9 @@ const useApplicationData = () => {
     appointments: {},
     interviewers: [],
   });
-  const setDay = (day) => setState({ ...state, day });
+  const setDay = (day) => {
+    setState({ ...state, day: day });
+  };
 
   const updateNumOfOpenSpots = (days, id, incrementBy) => {
     //find the day that contains the appointment
