@@ -67,17 +67,15 @@ const useApplicationData = () => {
       [id]: appointment,
     };
 
-    return axios
-      .put(`http://localhost:8001/api/appointments/${id}`, { interview })
-      .then(() => {
-        setState((state) => {
-          return {
-            ...state,
-            appointments: appointments,
-          };
-        });
-        updateNumOfOpenSpots(state.days, id, -1);
+    return axios.put(`/api/appointments/${id}`, { interview }).then(() => {
+      setState((state) => {
+        return {
+          ...state,
+          appointments: appointments,
+        };
       });
+      updateNumOfOpenSpots(state.days, id, -1);
+    });
   };
 
   const editInterview = (id, interview) => {
@@ -90,25 +88,21 @@ const useApplicationData = () => {
       [id]: appointment,
     };
 
-    return axios
-      .put(`http://localhost:8001/api/appointments/${id}`, { interview })
-      .then(() => {
-        setState((state) => {
-          return {
-            ...state,
-            appointments: appointments,
-          };
-        });
-        updateNumOfOpenSpots(state.days, id, 0);
+    return axios.put(`/api/appointments/${id}`, { interview }).then(() => {
+      setState((state) => {
+        return {
+          ...state,
+          appointments: appointments,
+        };
       });
+      updateNumOfOpenSpots(state.days, id, 0);
+    });
   };
 
   const cancelInterview = (id) => {
-    return axios
-      .delete(`http://localhost:8001/api/appointments/${id}`)
-      .then(() => {
-        updateNumOfOpenSpots(state.days, id, 1);
-      });
+    return axios.delete(`/api/appointments/${id}`).then(() => {
+      updateNumOfOpenSpots(state.days, id, 1);
+    });
   };
 
   return { state, setDay, bookInterview, cancelInterview, editInterview };
